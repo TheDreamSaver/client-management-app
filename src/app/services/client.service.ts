@@ -11,7 +11,7 @@ export class ClientService {
   constructor(
     public af:AngularFireDatabase
   ) { 
-    this.clients = this.af.list('/clients/') as FirebaseListObservable<Client[]>;
+    this.clients = this.af.list('/clients') as FirebaseListObservable<Client[]>;
   }
 
   getClients(){
@@ -21,4 +21,10 @@ export class ClientService {
   newClient(client:Client){
     this.clients.push(client);
   }
+
+  getClient(id:string){
+    this.client = this.af.object('/clients/'+id) as FirebaseObjectObservable<Client>;
+    return this.client;
+  }
+
 }
